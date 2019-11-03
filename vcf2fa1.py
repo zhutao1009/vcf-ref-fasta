@@ -13,7 +13,7 @@ args = parser.parse_args()
 
 def usage():
 	print ("************************************************")
-	print ("python vcf-ref-fa.py -r /path/to/refrence -m /path/to/intermediate/file -k [T|F] ")
+	print ("python vcf2fa.py -r /path/to/refrence -m /path/to/intermediate/file -k [T|F] ")
 	print ("************************************************")
 
 ambi={
