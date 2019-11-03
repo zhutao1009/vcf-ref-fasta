@@ -1,6 +1,7 @@
 #-*-coding:utf-8-*-
 import re
 import argparse
+import numpy as np
 import os, sys
 
 parser = argparse.ArgumentParser()
@@ -64,15 +65,16 @@ def readfasta(input):#Read reference sequence
 	with open(input,'r') as f:
 		fasta={}
 		for line in f:
-			line = line.strip()
+			line = line.strip("\n")
 			if line[0] == '>':
 				h = line[1:].split(" ")
 				header=h[0]
 			else:
-				sequence = line
-				fasta[header] = fasta.get(header,'') + sequence
-		for base in fasta:
-			fasta[base]=list(fasta[base])
+				sequence = np.array(list(line))
+				if header in fasta:
+					fasta[header]=np.append(fasta[header],sequence)
+				else:
+					fasta[header]=sequence		
 	return fasta
 
 def fastawrit(list,listname,file):#Write sequence to a file
